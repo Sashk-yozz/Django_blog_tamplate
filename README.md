@@ -1,1 +1,17 @@
-# Django_blog_tamplate
+# Images of some pages
+
+The main page:
+![main_page](https://github.com/Sashk-yozz/screenshots/blob/main/Django_blog_tamplate/main_page.png)
+
+Registration page:
+![registration page](https://github.com/Sashk-yozz/screenshots/blob/main/Django_blog_tamplate/registration%20page.png)
+
+Login page:
+![login page](https://github.com/Sashk-yozz/screenshots/blob/main/Django_blog_tamplate/login%20page.png)
+
+Add article page:
+![add article](https://github.com/Sashk-yozz/screenshots/blob/main/Django_blog_tamplate/add_article_page.png)
+
+Profile_page:
+![profile_page](https://github.com/Sashk-yozz/screenshots/blob/main/Django_blog_tamplate/profile_page.png)
+
