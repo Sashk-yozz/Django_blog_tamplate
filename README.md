@@ -12,6 +12,5 @@ Login page:
 Add article page:
 ![add article](https://github.com/Sashk-yozz/screenshots/blob/main/Django_blog_tamplate/add_article_page.png)
 
-Profile_page:
+Profile page:
 ![profile_page](https://github.com/Sashk-yozz/screenshots/blob/main/Django_blog_tamplate/profile_page.png)
-

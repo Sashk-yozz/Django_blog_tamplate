@@ -1,0 +1,47 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+        <div class="alert alert-light">
+          <h1>{{ object.title }}</h1>
+          <p>{{ object.text|safe }}</p>
+          <div class="row">
+            <div>
+              <img src="{{ object.avtor.profile.img.url }}" alt="{{ object.avtor }}" class="user_images">
+            </div>
+            <div class="mt-2">
+              <span class="text-muted">Публикация: {{ object.date|date:"d E Y, в H:i" }}</span>
+              <p><b>Автор:</b> <a href="{% url 'user-news' object.avtor %}">{{ object.avtor }}</a></p>
+            </div>
+          </div>
+            {% if object.avtor == user %}
+                <hr>
+                <a href="{% url 'news-update' object.id %}" class="btn btn-info">Обновить статью</a>
+                <a href="{% url 'news-delete' object.id %}" class="btn btn-danger">Удалить статью</a>
+            {% endif %}
+        </div>
+{% endblock %}
+
+{% block aside_block %}
+    <h4 class="mt-2">Интересные статьи</h4>
+    <img src="https://pythonist.ru/wp-content/uploads/2020/10/1_0g5zu7cnxdmt9pgbyutqlq.png" class="img-thumbnail">
+    <p class="mt-2"><mark class="bg-info rounded">Flask</mark> — фреймворк для создания веб-приложений на языке
+        программирования Python, использующий набор инструментов Werkzeug, а также шаблонизатор Jinja2.
+        Относится к категории так называемых микрофреймворков — минималистичных каркасов веб-приложений,
+        сознательно предоставляющих лишь самые базовые возможности.</p>
+    <a href="https://flask-russian-docs.readthedocs.io/ru/latest/" target="_blank">
+        <button class="btn btn-warning">Посмотреть</button>
+    </a>
+        <img src="https://miuc.org/wp-content/uploads/2020/08/6-Reasons-why-you-should-learn-Programming-1280x720.png" class="img-thumbnail mt-3">
+    <p class="mt-2"><mark class="bg-info rounded">Django</mark> — веб-фреймворк для создания сайтов, написанный на языке Python.
+        Язык и является одним из основных его преимуществ, так как обеспечивает быстрое написание кода.
+        Также Django имеет "батарейки в комплекте", что означает, что для многих распространённых задач
+        уже есть написанная библиотека. На текущий момент Django считается
+        основным фреймворком Python для разработки веб-сайтов и веб-сервисов.</p>
+    <a href="https://pythonworld.ru/web" target="_blank">
+        <button class="btn btn-warning">Посмотреть</button>
+    </a>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    {% for post in news %}
+        <div class="alert alert-light">
+          <h1>{{ post.title }}</h1>
+          <p>{{ post.text|striptags|truncatechars:200 }}</p>
+          <div class="row">
+<!--            <div>-->
+<!--              <img src="{{ post.avtor.profile.img.url }}" alt="{{ post.avtor }}" class="user_images">-->
+<!--            </div>-->
+            <div class="mt-2">
+              <span class="text-muted">Публикация: {{ post.date|date:"d E Y, в H:i" }}</span>
+              <p><b>Автор:</b> <a href="{% url 'user-news' post.avtor %}">{{ post.avtor }}</a></p>
+            </div>
+          </div>
+            <a href="{% url 'news-detail' post.id %}" class="btn btn-outline-warning">Читать далее</a>
+        </div>
+    {% endfor %}
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="{% url 'home' %}" class="btn btn-outline-danger">Начало</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-danger">Предыдущая</a>
+        {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if num == page_obj.number %}
+        <button class="btn btn-danger">{{ num }}</button>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a href="?page={{ num }}" class="btn btn-outline-danger">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+
+
+    {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-danger">Следующая</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-danger">Последняя</a>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block aside_block %}
+    <h4 class="mt-2">Интересные статьи</h4>
+    <img src="https://pythonist.ru/wp-content/uploads/2020/10/1_0g5zu7cnxdmt9pgbyutqlq.png" class="img-thumbnail">
+    <p class="mt-2"><mark class="bg-info rounded">Flask</mark> — фреймворк для создания веб-приложений на языке
+        программирования Python, использующий набор инструментов Werkzeug, а также шаблонизатор Jinja2.
+        Относится к категории так называемых микрофреймворков — минималистичных каркасов веб-приложений,
+        сознательно предоставляющих лишь самые базовые возможности.</p>
+    <a href="https://flask-russian-docs.readthedocs.io/ru/latest/" target="_blank">
+        <button class="btn btn-warning">Посмотреть</button>
+    </a>
+        <img src="https://miuc.org/wp-content/uploads/2020/08/6-Reasons-why-you-should-learn-Programming-1280x720.png" class="img-thumbnail mt-3">
+    <p class="mt-2"><mark class="bg-info rounded">Django</mark> — веб-фреймворк для создания сайтов, написанный на языке Python.
+        Язык и является одним из основных его преимуществ, так как обеспечивает быстрое написание кода.
+        Также Django имеет "батарейки в комплекте", что означает, что для многих распространённых задач
+        уже есть написанная библиотека. На текущий момент Django считается
+        основным фреймворком Python для разработки веб-сайтов и веб-сервисов.</p>
+    <a href="https://pythonworld.ru/web" target="_blank">
+        <button class="btn btn-warning">Посмотреть</button>
+    </a>
+{% endblock %}

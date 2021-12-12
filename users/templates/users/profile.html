@@ -1,0 +1,45 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    Кабинет пользователя
+{% endblock %}
+
+{% block content %}
+    <h1>Кабинет пользователя</h1>
+    <div class="media text-muted pt-3">
+        <img class="bd-placeholder-img mr-2 rounded" width="64" height="64" src="{{ user.profile.img.url }}">
+        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <strong class="d-block text-gray-dark">@{{ user.username }}</strong>
+            {% if user.email %}
+                <b>Email:</b> {{ user.email }}
+            {% endif %}
+        </p>
+  </div>
+    <form method="post" enctype="multipart/form-data" class="form-register mt-4">
+        {% csrf_token %}
+        {{ updateUserForm.as_p }}
+        {{ profileForm.as_p }}
+        <button class="btn btn-outline-warning" type="submit">Обновить</button>
+    </form>
+{% endblock %}
+
+{% block aside_block %}
+    <h4 class="mt-2">Интересные статьи</h4>
+    <img src="https://miuc.org/wp-content/uploads/2020/08/6-Reasons-why-you-should-learn-Programming-1280x720.png" class="img-thumbnail">
+    <p class="mt-2"><mark class="bg-info rounded">Django</mark> — веб-фреймворк для создания сайтов, написанный на языке Python.
+        Язык и является одним из основных его преимуществ, так как обеспечивает быстрое написание кода.
+        Также Django имеет "батарейки в комплекте", что означает, что для многих распространённых задач
+        уже есть написанная библиотека. На текущий момент Django считается
+        основным фреймворком Python для разработки веб-сайтов и веб-сервисов.</p>
+    <a href="https://pythonworld.ru/web" target="_blank">
+        <button class="btn btn-warning">Посмотреть</button>
+    </a>
+    <img src="https://pythonist.ru/wp-content/uploads/2020/10/1_0g5zu7cnxdmt9pgbyutqlq.png" class="img-thumbnail mt-3">
+    <p class="mt-2"><mark class="bg-info rounded">Flask</mark> — фреймворк для создания веб-приложений на языке
+        программирования Python, использующий набор инструментов Werkzeug, а также шаблонизатор Jinja2.
+        Относится к категории так называемых микрофреймворков — минималистичных каркасов веб-приложений,
+        сознательно предоставляющих лишь самые базовые возможности.</p>
+    <a href="https://flask-russian-docs.readthedocs.io/ru/latest/" target="_blank">
+        <button class="btn btn-warning">Посмотреть</button>
+    </a>
+{% endblock %}
