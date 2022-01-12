@@ -1,4 +1,12 @@
-# Images of some pages
+# This my blog created with django
+
+If you want use my project need install next utilities:
+```
+pip install Django==3.2
+pip install Pillow
+```
+
+### Images of some pages
 
 The main page:
 ![main_page](https://github.com/Sashk-yozz/screenshots/blob/main/Django_blog_tamplate/main_page.png)
