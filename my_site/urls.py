@@ -11,7 +11,7 @@ urlpatterns = [
     path('profile/', include('users.urls')),
     path('user/', authViews.LoginView.as_view(template_name='users/user.html'), name='user'),
     path('exit/', authViews.LogoutView.as_view(template_name='users/exit.html'), name='exit'),
-    # Востановление пароля (pass, password)
+    # Password recovery
     path('pass-reset/',
          authViews.PasswordResetView.as_view(template_name='users/pass_reset.html'),
          name='pass-reset'),
@@ -29,6 +29,6 @@ urlpatterns = [
          name='password_reset_done'),
 ]
 
-# Указываем путь в ручном режиме к папке с изображениями
+# Specifying the path in manual mode to the folder with images
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

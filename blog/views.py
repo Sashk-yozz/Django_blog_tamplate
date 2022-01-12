@@ -5,14 +5,12 @@ from django.views.generic import ListView, DeleteView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
-# Вывод статей
+# Articles output
 class ShowNewsView(ListView):
     model = News
     template_name = 'blog/home.html'
     context_object_name = 'news'
-    # Сортировка
     ordering = ['-date']
-    # Количество страниц пагинации
     paginate_by = 3
 
     def get_context_data(self, **kwargs):
@@ -22,7 +20,7 @@ class ShowNewsView(ListView):
         return ctx
 
 
-# Вывод ссылки пользователя
+# User link
 class UserAllNewsView(ListView):
     model = News
     template_name = 'blog/user_news.html'
@@ -40,13 +38,13 @@ class UserAllNewsView(ListView):
         return ctx
 
 
-# Переход на статью
+# Go to article
 class NewsDetailView(DeleteView):
     model = News
     template_name = 'blog/news_detail.html'
     context_object_name = 'post'
 
-    # Берет название для титульной страницы из титула статьи
+    # Takes the title for the title page from the title of the article
     def get_context_data(self, **kwards):
         ctx = super(NewsDetailView, self).get_context_data(**kwards)
 
@@ -54,14 +52,13 @@ class NewsDetailView(DeleteView):
         return ctx
 
 
-# Добавляет статьи через сайт
+# Add articles through the site
 class CreateNewsView(LoginRequiredMixin, CreateView):
     model = News
     template_name = 'blog/create_news.html'
 
     fields = ['title', 'text']
 
-    # Берет название для титульной страницы из титула статьи
     def get_context_data(self, **kwards):
         ctx = super(CreateNewsView, self).get_context_data(**kwards)
 
@@ -74,14 +71,13 @@ class CreateNewsView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-# Обновление статьи на сайте
+# Updating the article on the site
 class UpdateNewsView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = News
     template_name = 'blog/create_news.html'
 
     fields = ['title', 'text']
 
-    # Берет название для титульной страницы из титула статьи
     def get_context_data(self, **kwards):
         ctx = super(UpdateNewsView, self).get_context_data(**kwards)
 
@@ -89,7 +85,7 @@ class UpdateNewsView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         ctx['btn_text'] = 'Обновить статью'
         return ctx
 
-    # Не автор статьи не может редактировать статью
+    # Unauthorized user cannot edit the article
     def test_func(self):
         news = self.get_object()
         if self.request.user == news.avtor:
@@ -107,7 +103,7 @@ class DeleteNewsView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = '/'
     template_name = 'blog/delete-news.html'
 
-    # Не автор статьи не может удалить статью
+    # Unauthorized user cannot delete the article
     def test_func(self):
         news = self.get_object()
         if self.request.user == news.avtor:

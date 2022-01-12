@@ -1,13 +1,13 @@
 from django import forms
-# Класс User работает с табличкой пользователей
+# User class works with users table
 from django.contrib.auth.models import User
-# Встроеные формы в джанго
+# Forms in django
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
 
 class UserRegisterForm(UserCreationForm):
-    # Поле в форме (используються при наследовании form.Forms)
+    # Fields in form django
     username = forms.CharField(
         label='Login',
         required=True,
@@ -34,16 +34,16 @@ class UserRegisterForm(UserCreationForm):
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Повторно введите пароль'})
     )
 
-    # В класе мета прописываем характеристики (при использовании UserCreationForm)
+    # In class meta, we write the characteristics (when using UserCreationForm)
     class Meta:
         model = User
-        # Поля в форме
+        # Fields in form
         fields = ['username', 'email', 'password1', 'password2']
 
 
 class UserUpdateForm(forms.ModelForm):
-    # Этот клас обновляет email и login
-    # Поле в форме (используються при наследовании form.Forms)
+    # This class updates email and login
+    # Form field (used when inheriting form.Forms)
     username = forms.CharField(
         label='Login',
         required=True,
@@ -59,12 +59,12 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        # Поля в форме
+        # Fields in form
         fields = ['username', 'email']
 
 
 class ProfileImageForm(forms.ModelForm):
-    # Класс для загрузки фото в личном кабинете
+    # Class for uploading photos in your personal account
     img = forms.ImageField(
         label='Загрузить фото',
         required=False,
@@ -74,10 +74,3 @@ class ProfileImageForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['img']
-
-
-
-
-#some = forms.ModelChoiceField(queryset=User.objects.all())         Поле для списка выбора!!!
-
-''' В Джанго что бы создать форму нужно создать класс и в классе описать какие будут поля в форме'''

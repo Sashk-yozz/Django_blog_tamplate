@@ -1,23 +1,21 @@
 from django.shortcuts import render, redirect
-# Ипорт класса для форм
-# from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegisterForm, ProfileImageForm, UserUpdateForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 
-# Обрабатывает страницу с регистрацией (html)
+# Handles the registration page
 def register(request):
-    # Проверяет данные из страницы регистрации
+    # Checks data from the registration page
     if request.method == "POST":
-        # В этом объекте храняться все данные получиные от пользователя
+        # All data received from the user is stored in this object.
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            # Сохраняет данные в БД
+            # Saves data to the database
             form.save()
-            # Берет имя пользователя с страницы регистрации
+            # Takes username from registration page
             username = form.cleaned_data.get('username')
-            # Cообщение об успешной регистрации пользователя
+            # User registration successful message
             messages.success(request, f'Пользователь {username} был успешно создан!')
             return redirect('home')
     else:
@@ -33,10 +31,10 @@ def register(request):
     )
 
 
-# Дикоратор проверяет авторизован ли пользователь
+# Checks if the user is authorized
 @login_required
 def profile(request):
-    # Проверка верны ли данные пользователя
+    # Checking if user data is correct
     if request.method == "POST":
         profileForm = ProfileImageForm(request.POST, request.FILES, instance=request.user.profile)
         updateUserForm = UserUpdateForm(request.POST, instance=request.user)

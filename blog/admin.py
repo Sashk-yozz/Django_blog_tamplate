@@ -1,5 +1,5 @@
 from django.contrib import admin
 from .models import News
 
-# Регестрируем таблицу из БД для Админ панели
+# Registering table from database for admin panel
 admin.site.register(News)
